@@ -1,22 +1,21 @@
-# Calculadora de Combate de Dune
+# Dune Combat Calculator
 
-Esta herramienta permite calcular la fuerza de las tropas que comprometerás a la batalla al jugar con las reglas de combate avanzado en el juego de mesa Dune, publicado en 2019 por Gale Force Nine.
+This tool for Gale Force Nine's Dune board game is used to calculate the strength of your forces in battle when using the advanced combat rules, which require spice to be paid in order for your forces to contribute their full strength.
 
-Simplemente elige la facción como la cual estás jugando e introduce la cantidad de tropas (ordinarias y marcadas con estrellas, si tu facción las tiene) que comprometerás, así como la cantidad de especia que deseas pagar para apoyar a tus tropas.
+To use it, choose your faction and three fields will appear:
 
-+ No puedes marcar más especia que tropas. Si introduces un número demasiado alto en el campo de "Especia", la calculadora automáticamente lo reduce al máximo posible. En el caso de los Ixianos, no puedes marcar más especia que Cyborgs.
-+ **GANES O PIERDAS**, perderás las tropas y la especia que indiques.
-+ Puedes marcar el número en el campo de "Fuerza" en la rueda de batalla, o usar tu dispositivo con esta herramienta *en lugar* de la rueda de batalla.
++ **Forces.** Use this field to indicate how many force tokens you will commit to the battle. Win or lose, these forces will die.
++ **Spice.** Use this field to indicate how much spice you will pay to increase the strength of your forces.
++ **Strength.** Read only. This is the resulting strength calculated using the other two fields. Dial this number on the battle wheel.
 
-## Casos Especiales
+If you play as the Emperor, the Fremen, or the Ixians, you will have special forces (Sardaukar, Fedaykin, and Cyborgs, respectively). In these cases, the Forces field will be renamed **Ordinary Forces**, and a new field will appear for you to commit your special forces.uerza" en la rueda de batalla, o usar tu dispositivo con esta herramienta *en lugar* de la rueda de batalla.
 
-Algunas circunstancias, particularmente el uso de Cartas Karama, puede afectar la manera en la que calculas tu fuerza de batalla:
+## Karama'ing Starred Tokens
 
-+ Si juegas como el **Emperador** y se usa una Carta Karama para anular la fuerza de tus tropas Sardaukar, deja el campo de "Sardaukar" en cero (0) y utiliza únicamente el campo de "Tropas Ordinarias". Si necesitas introducir un número mayor a 15 tropas, cambia a otra facción (p.ej. los Atreides) y usa la herramienta como si fueras esa facción.
-+ Si juegas como los **Fremen** y se usa una Carta Karama para anular la fuerza de tus tropas Fedaykin, deja el campo de "Fedaykin" en cero (0) y utiliza únicamente el campo de "Tropas Ordinarias". Si necesitas introducir un número mayor a 17 tropas, cambia a otra facción (p.ej. los Atreides) y usa la herramienta como si fueras esa facción, indicando el número máximo de especia posible (que no tendrás que pagar).
-+ Si juegas como los **Fremen** y se usa una Carta Karama para obligarte a pagar especia en combate, marca la casilla "Requerir Especia". Un campo de "Especia" aparecerá y la fuerza será recalculada.
+The calculator does not have an option to "Karama" the starred tokens of the Emperor and the Fremen and force them to count as ordinary forces. If you are Karama'ed in this way, simply dial your battle plan as if all the tokens in the territory were "Ordinary Forces".
 
-## Cambios Planeados
+There is, however, an option for when the Fremen are Karama'ed and forced to pay spice support. Simply tick the "Spice Support" checkbox and the Spice field will appear.
 
-+ Opciones para los Fremen y el Emperador para contemplar los casos especiales indicados arriba.
-+ Posibilidad de incluir cartas de traición y líderes en el plan de batalla.
+## Future Plans
+
+I plan to revisit this calculator in my free time, and I have thought of the possibility of adding things, namely the possibility of including Treachery Cards and Leaders, making it so that the game's battle wheels can be entirely replaced with this tool.
