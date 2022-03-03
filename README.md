@@ -6,9 +6,9 @@ To use it, choose your faction and three fields will appear:
 
 + **Forces.** Use this field to indicate how many force tokens you will commit to the battle. Win or lose, these forces will die.
 + **Spice.** Use this field to indicate how much spice you will pay to increase the strength of your forces.
-+ **Strength.** Read only. This is the resulting strength calculated using the other two fields. Dial this number on the battle wheel.
++ **Strength** (Read only). This is the resulting strength calculated using the other two fields. Dial this number on the battle wheel.
 
-If you play as the Emperor, the Fremen, or the Ixians, you will have special forces (Sardaukar, Fedaykin, and Cyborgs, respectively). In these cases, the Forces field will be renamed **Ordinary Forces**, and a new field will appear for you to commit your special forces.uerza" en la rueda de batalla, o usar tu dispositivo con esta herramienta *en lugar* de la rueda de batalla.
+If you play as the Emperor, the Fremen, or the Ixians, you will have special forces (Sardaukar, Fedaykin, and Cyborgs, respectively). In these cases, the Forces field will be renamed **Ordinary Forces**, and a new field will appear for you to commit your special forces.
 
 ## Karama'ing Starred Tokens
 
