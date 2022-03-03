@@ -13,14 +13,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-function calcMax() {
-  if ($( "#faction" ).children("option:selected").val() == '6') {
-    return parseInt($( "#stars" ).val())
-  } else {
-    return parseInt($( "#forces" ).val()) + parseInt($( "#stars" ).val())
-  }
-}
-
 function calcStr() {
   var faction = $( "#faction" ).children("option:selected").val()
   var forces = parseInt($( "#forces" ).val())
@@ -49,26 +41,40 @@ function calcStr() {
   $( "#strength" ).val( strength.toString() )
 }
 
-function validate() {
+function validateForces() {
   var forces = parseInt($( "#forces" ).val())
   var stars = parseInt($( "#stars" ).val())
-  var spice = parseInt($( "#spice" ).val())
 
   var forces_max = parseInt($( "#forces" ).attr( "max" ))
   var stars_max = parseInt($( "#stars" ).attr( "max" ))
-  var spice_max = parseInt($( "#spice" ).attr( "max" ))
 
   if (forces > forces_max)
     $( "#forces" ).val( $( "#forces" ).attr( "max" ) )
   if (stars > stars_max)
     $( "#stars" ).val( $( "#stars" ).attr( "max" ) )
-  if (spice > spice_max)
-    $( "#spice" ).val( $( "#spice" ).attr( "max" ) )
-    
+
   if (forces < 0)
     $( "#forces" ).val( 0 )
   if (stars < 0)
     $( "#stars" ).val( 0 )
+
+}
+
+function validateSpice() {
+  var spice = parseInt($( "#spice" ).val())
+  var spice_max = 0
+
+  if ($( "#faction" ).children("option:selected").val() == '6') {
+    spice_max = parseInt($( "#stars" ).val())
+  } else {
+    spice_max = parseInt($( "#forces" ).val()) + parseInt($( "#stars" ).val())
+  }
+
+  $( "#spice" ).attr("max", spice_max)
+
+  if (spice > spice_max)
+    $( "#spice" ).val( $( "#spice" ).attr( "max" ) )
+
   if (spice < 0)
     $( "#spice" ).val( 0 )
 
@@ -152,22 +158,9 @@ $( document ).ready(function() {
     calcStr()
   })
 
-  $( "#forces" ).on("change", function(){
-    var spiceMax = calcMax()
-    $( "#spice" ).attr("max", spiceMax)
-    validate()
-    calcStr()
-  })
-
-  $( "#stars" ).on("change", function(){
-    var spiceMax = calcMax()
-    $( "#spice" ).attr("max", spiceMax)
-    validate()
-    calcStr()
-  })
-
-  $( "#spice" ).on("change", function(){
-    validate()
+  $( "#forces, #stars, #spice" ).on("change", function(){
+    validateForces()
+    validateSpice()
     calcStr()
   })
 })
