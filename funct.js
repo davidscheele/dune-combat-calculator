@@ -49,9 +49,9 @@ function validateForces() {
   var stars_max = parseInt($( "#stars" ).attr( "max" ))
 
   if (forces > forces_max)
-    $( "#forces" ).val( $( "#forces" ).attr( "max" ) )
+    $( "#forces" ).val( forces_max )
   if (stars > stars_max)
-    $( "#stars" ).val( $( "#stars" ).attr( "max" ) )
+    $( "#stars" ).val( stars_max )
 
   if (forces < 0)
     $( "#forces" ).val( 0 )
@@ -73,7 +73,7 @@ function validateSpice() {
   $( "#spice" ).attr("max", spice_max)
 
   if (spice > spice_max)
-    $( "#spice" ).val( $( "#spice" ).attr( "max" ) )
+    $( "#spice" ).val( spice_max )
 
   if (spice < 0)
     $( "#spice" ).val( 0 )
