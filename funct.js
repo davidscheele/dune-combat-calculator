@@ -74,7 +74,7 @@ $( document ).ready(function() {
       // Emperor
       case '3':
         // console.log("emperor")
-        $( "#forces-label" ).text( "Tropas ordinarias" )
+        $( "#forces-label" ).text( "Ordinary Forces" )
         $( "#stars-label" ).text( "Sardaukar (★)" )
         $( "#forces" ).attr( "max", 15 )
         $( "#stars" ).attr( "max", 5 )
@@ -86,7 +86,7 @@ $( document ).ready(function() {
       // Fremen
       case '4':
         // console.log("fremen")
-        $( "#forces-label" ).text( "Tropas ordinarias" )
+        $( "#forces-label" ).text( "Ordinary Forces" )
         $( "#stars-label" ).text( "Fedaykin (★)" )
         $( "#forces" ).attr( "max", 17 )
         $( "#stars" ).attr( "max", 3 )
@@ -98,7 +98,7 @@ $( document ).ready(function() {
       // Ixians
       case '6':
         // console.log("ixians")
-        $( "#forces-label" ).text( "Suboides" )
+        $( "#forces-label" ).text( "Suboids" )
         $( "#stars-label" ).text( "Cyborgs (★)" )
         $( "#forces" ).attr( "max", 13 )
         $( "#stars" ).attr( "max", 7 )
@@ -110,8 +110,8 @@ $( document ).ready(function() {
       // Other factions
       default:
         // console.log("other")
-        $( "#forces-label" ).text( "Tropas" )
-        $( "#stars-label" ).text( "Tropas con estrella" )
+        $( "#forces-label" ).text( "Forces" )
+        $( "#stars-label" ).text( "" )
         $( "#forces" ).attr( "max", 20 )
         $( "#stars" ).attr( "max", 0 )
         $( "#forces-column" ).removeClass( "is-hidden" )
