@@ -64,6 +64,13 @@ function validate() {
     $( "#stars" ).val( $( "#stars" ).attr( "max" ) )
   if (spice > spice_max)
     $( "#spice" ).val( $( "#spice" ).attr( "max" ) )
+    
+  if (forces < 0)
+    $( "#forces" ).val( 0 )
+  if (stars < 0)
+    $( "#stars" ).val( 0 )
+  if (spice < 0)
+    $( "#spice" ).val( 0 )
 
 }
 
