@@ -36,3 +36,11 @@
   visibility: visible;
   opacity: 1;
 }
+
+img {
+    cursor:pointer;
+    max-width:100%;
+    /*For centering an img*/
+    display:block;
+    margin:auto;
+}
