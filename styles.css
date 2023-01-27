@@ -37,6 +37,10 @@
   opacity: 1;
 }
 
+#faction-icon {
+	cursor:unset;
+}
+
 img {
     cursor:pointer;
     max-width:100%;

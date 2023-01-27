@@ -24,13 +24,13 @@
     <script src="funct.js"></script>
   </head>
   <body>
-    <section class="hero is-dark">
+    <section class="hero is-dark" id="banner">
       <div class="hero-body has-text-centered">
         <h1 class="title">
-          Combat Calculator
+          Digital Battlewheel
         </h1>
         <p class="subtitle">
-          for Dune (2019)
+          Combat Strength Calculator for Dune (2019)
         </p>
       </div>
     </section>
@@ -175,12 +175,10 @@
               <div class="field has-text-centered">
 			  <img src="img/leaders/captured-leader.png" width="100" height="100" id="captured-leader-button" onclick="leaderclick(10)">
               </div>
-        </div>
-				<div class="column is-hidden" id="leader-killed-column">
-              <div class="field has-text-centered">
-			  <img src="img/leaders/leader-killed.png" width="50" height="50" id="captured-leader-button" onclick="leaderclick(99)">
-              </div>
-        </div>
+		</div>
+				<div class="column is-hidden field has-text-centered" id="leader-killed-column">
+			  <img src="img/leaders/leader-killed.png" width="50" height="50" id="leader-killed-button" onclick="leaderclick(99)">
+			  </div>
 		<div class="column"></div>
 		</div>
 		<div class="columns is-multiline is-mobile has-text-centered is-hidden" id="faction-columns">
@@ -231,6 +229,70 @@
 			</div>
 		</div>
 		 <div class="column"></div>
+		</div>
+		<div class="columns is-multiline is-mobile has-text-centered is-hidden" id="treachery-columns">
+			<div class="column"></div>
+			<div class="column is-narrow" id="weapon-column">
+				<img class="is-hidden" src="" id="weapon-icon" width="50" height="50">
+				<img class="is-hidden" src="" id="weapon-icon2" width="50" height="50">
+				<label class="label is-hidden" id="weapon-icon-label"></label>
+				<div class="field has-text-centered">
+					<label class="label" for="weapon">Weapon</label>
+					<div class="select is-rounded">
+						<select class="has-text-centered" name="weapon" id="weapon">
+							<option value="0">No Weapon</option>
+							<option value="1">Crysknife</option>
+							<option value="2">Hunter Seeker</option>
+							<option value="3">Maula Pistol</option>
+							<option value="4">Slip Tip</option>
+							<option value="5">Stunner</option>
+							<option value="6">Basilia Weapon</option>
+							<option value="7">Chaumas</option>
+							<option value="8">Chaumurky</option>
+							<option value="9">Ellaca Drug</option>
+							<option value="10">Gom Jabbar</option>
+							<option value="11">Poison Tooth</option>
+							<option value="12">Artillery Strike</option>
+							<option value="13">Lasgun</option>
+							<option value="14">Poison Blade</option>
+							<option value="15">Weirding Way</option>
+							<option value="16">Chemistry</option>
+							<option value="17">Baliset (Worthless)</option>
+							<option value="18">Jubba Cloak (Worthless)</option>
+							<option value="19">Kull Wahad (Worthless)</option>
+							<option value="20">Kulon (Worthless)</option>
+							<option value="21">La, La, La (Worthless)</option>
+							<option value="22">Trip to Gamont (Worthless)</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="column is-narrow" id="defense-column">
+				<img class="is-hidden" src="" id="defense-icon" width="50" height="50">
+				<img class="is-hidden" src="" id="defense-icon2" width="50" height="50">
+				<label class="label is-hidden" id="defense-icon-label"></label>
+				<div class="field has-text-centered">
+					<label class="label" for="defense">Defense</label>
+					<div class="select is-rounded">
+						<select class="has-text-centered" name="defense" id="defense">
+							<option value="0">No Defense</option>
+							<option value="1">Shield</option>
+							<option value="2">Snooper</option>
+							<option value="3">Chemistry</option>
+							<option value="4">Shield Snooper</option>
+							<option value="5">Weirding Way</option>
+							<option value="6">Baliset (Worthless)</option>
+							<option value="7">Jubba Cloak (Worthless)</option>
+							<option value="8">Kull Wahad (Worthless)</option>
+							<option value="9">Kulon (Worthless)</option>
+							<option value="10">La, La, La (Worthless)</option>
+							<option value="11">Trip to Gamont (Worthless)</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			 <div class="column"></div>
+		</div>
         </form>
       </div>
     </section>

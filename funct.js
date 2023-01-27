@@ -101,6 +101,7 @@ function noleaderclick(){
 	$( "#no-leader-column" ).addClass( "is-hidden" )
 	$( "#faction-columns" ).addClass( "is-hidden" )
 	$( "#leader-killed-column" ).addClass( "is-hidden" )
+	$( "#treachery-columns" ).addClass( "is-hidden" )
 	$( "#leader-columns" ).removeClass( "is-hidden" )
 	$( "#cheap-hero-column" ).removeClass( "is-hidden" )
 	switch (faction) {
@@ -140,6 +141,7 @@ function leaderclick(leaderint){
 		$( "#no-leader-button" ).attr("src", `img/leaders/${hostagefaction}-leader-${leaderint}.png`)
 		$( "#leader-killed-column" ).removeClass( "is-hidden" )
 		leaderstrength = leadervalues[hostagefaction][leaderint]
+		$( "#treachery-columns" ).removeClass( "is-hidden" )
 		calcStr()
 	}
 	else
@@ -154,6 +156,7 @@ function leaderclick(leaderint){
 				$( "#no-leader-button" ).attr("src", `img/leaders/leader-0.png`)
 				$( "#leader-killed-column" ).removeClass( "is-hidden" )
 				leaderstrength = 0
+				$( "#treachery-columns" ).removeClass( "is-hidden" )
 				calcStr()
 			break
 			//Captured leader selection
@@ -166,6 +169,7 @@ function leaderclick(leaderint){
 				$( "#no-leader-button" ).attr("src", `img/leaders/${faction}-leader-${leaderint}.png`)
 				$( "#leader-killed-column" ).removeClass( "is-hidden" )
 				leaderstrength = leadervalues[faction][leaderint]
+				$( "#treachery-columns" ).removeClass( "is-hidden" )
 				calcStr()
 			break
 		}
@@ -195,6 +199,7 @@ function validateSpice() {
 
 jQuery( document ).ready(function($) {
   $( "#faction" ).on("change", function(){
+	//$( "#banner" ).addClass( "is-hidden" )
     var faction = $( "#faction" ).children( "option:selected" ).val()
     $( "#forces-column" ).addClass( "is-hidden" )
     $( "#stars-column" ).addClass( "is-hidden" )
@@ -288,7 +293,139 @@ jQuery( document ).ready(function($) {
     calcStr()
   })
   
-
-  
-  
+  $( "#weapon" ).on("change", function(){
+	var weapon = parseInt($( "#weapon" ).children( "option:selected" ).val())
+	$( "#weapon-icon" ).addClass( "is-hidden" )
+	$( "#weapon-icon2" ).addClass( "is-hidden" )
+	$( "#weapon-icon-label" ).addClass( "is-hidden" )	
+	switch (true) {
+		//Projectile Weapons
+		case (weapon > 0 && weapon <= 5):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/projectile-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Keep if battle is won")
+		break
+		//Poison Weapons
+		case (weapon > 5 && weapon <= 10):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/poison-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Keep if battle is won")
+		break
+		//Poison Tooth
+		case (weapon == 11):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/poison-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("(Choice to use after reveal) <br /> Both leaders die <br /> Snooper does not protect <br /> Discard if used <br> Keep if battle is won and not used")
+		break
+		//Artillery Strike
+		case (weapon == 12):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/projectile-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Both leaders die <br /> (No spice payout) <br /> Shields protect <br /> Leaders do not add to strength <br /> Discard after use")
+		break
+		//Lasgun
+		case (weapon == 13):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/special-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("No defense against lasgun <br /> Lasgun + Shield = Boom <br /> Keep if battle is won")
+		break
+		//Poison Blade
+		case (weapon == 14):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/projectile-weapon-icon.png`)
+			$( "#weapon-icon2" ).removeClass( "is-hidden" )
+			$( "#weapon-icon2" ).attr("src", `img/weapon-icons/poison-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Keep if battle is won")
+		break
+		//Weirding Way
+		case (weapon == 15):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/projectile-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Keep if battle is won")
+		break
+		//Chemistry
+		case (weapon == 16):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/poison-weapon-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Needs to be played with <br /> a defense to be a weapon <br /> Keep if battle is won")
+			break
+		//Worthless
+		case (weapon > 16 && weapon <= 22):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/worthless-icon.png`)
+			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Worthless <br /> Discard after use")
+		break
+		default:
+			$( "#weapon-icon" ).addClass( "is-hidden" )
+			$( "#weapon-icon2" ).addClass( "is-hidden" )
+			$( "#weapon-icon-label" ).addClass( "is-hidden" )
+		break
+	}
+  })
+  $( "#defense" ).on("change", function(){
+	var defense = parseInt($( "#defense" ).children( "option:selected" ).val())
+	$( "#defense-icon" ).addClass( "is-hidden" )
+	$( "#defense-icon2" ).addClass( "is-hidden" )
+	$( "#defense-icon-label" ).addClass( "is-hidden" )
+	switch (true) {
+		//Shield
+		case (defense == 1):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/projectile-defense-icon.png`)
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Keep if battle is won")
+		break
+		//Snooper
+		case (defense == 2):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/poison-defense-icon.png`)
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Keep if battle is won")
+		break
+		//Chemistry
+		case (defense == 3):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/poison-defense-icon.png`)
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Keep if battle is won")
+		break
+		//Shield Snooper
+		case (defense == 4):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/projectile-defense-icon.png`)
+			$( "#defense-icon2" ).removeClass( "is-hidden" )
+			$( "#defense-icon2" ).attr("src", `img/weapon-icons/poison-defense-icon.png`)
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Keep if battle is won")
+		break
+		//Weirding Way
+		case (defense == 5):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/projectile-defense-icon.png`)
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Needs to be played with <br /> a weapon to be a defense <br /> Keep if battle is won")
+		break
+		//Worthless
+		case (defense > 5 && defense <= 11):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/worthless-icon.png`)
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Worthless <br /> Discard after use")
+		break
+		default:
+			$( "#defense-icon" ).addClass( "is-hidden" )
+			$( "#defense-icon2" ).addClass( "is-hidden" )
+			$( "#defense-icon-label" ).addClass( "is-hidden" )
+		break
+	}
+  })
 })
