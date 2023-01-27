@@ -100,7 +100,7 @@ function noleaderclick(){
 	$( "#leader5-button" ).attr("src", `img/leaders/${faction}-leader-5.png`)
 	$( "#no-leader-column" ).addClass( "is-hidden" )
 	$( "#faction-grid" ).addClass( "is-hidden" )
-	$( "#leader-killed-column" ).addClass( "is-hidden" )
+	$( "#leader-killed-button" ).addClass( "is-hidden" )
 	$( "#treachery-columns" ).addClass( "is-hidden" )
 	$( "#leader-columns" ).removeClass( "is-hidden" )
 	$( "#cheap-hero-column" ).removeClass( "is-hidden" )
@@ -117,6 +117,15 @@ function noleaderclick(){
 	}
 }
 
+function clearTreachery(){
+			$( "#weapon-icon" ).addClass( "is-hidden" )
+			$( "#weapon-icon2" ).addClass( "is-hidden" )
+			$( "#weapon-icon-label" ).addClass( "is-hidden" )
+			$( "#defense-icon" ).addClass( "is-hidden" )
+			$( "#defense-icon2" ).addClass( "is-hidden" )
+			$( "#defense-icon-label" ).addClass( "is-hidden" )
+}
+
 //General leader select
 function leaderclick(leaderint){
 	{var faction = $( "#faction" ).children( "option:selected" ).val()}
@@ -129,7 +138,7 @@ function leaderclick(leaderint){
 	if (leaderint == 99)
 	{
 		$( "#no-leader-button" ).attr("src", `img/leaders/leader-killed.png`)
-		$( "#leader-killed-column" ).addClass( "is-hidden" )
+		$( "#leader-killed-button" ).addClass( "is-hidden" )
 		leaderstrength = 0
 		calcStr()
 	}
@@ -139,7 +148,7 @@ function leaderclick(leaderint){
 	if (faction == 5 && hostagefaction > 0)
 	{
 		$( "#no-leader-button" ).attr("src", `img/leaders/${hostagefaction}-leader-${leaderint}.png`)
-		$( "#leader-killed-column" ).removeClass( "is-hidden" )
+		$( "#leader-killed-button" ).removeClass( "is-hidden" )
 		leaderstrength = leadervalues[hostagefaction][leaderint]
 		$( "#treachery-columns" ).removeClass( "is-hidden" )
 		calcStr()
@@ -150,11 +159,18 @@ function leaderclick(leaderint){
 			//No Leader
 			case -1:
 				$( "#no-leader-button" ).attr("src", `img/leaders/no-leader.png`)
+				$( "#leader-killed-button" ).addClass( "is-hidden" )
+				$( "#treachery-columns" ).addClass( "is-hidden" )
+				$( "#weapon" ).val(0)
+				$( "#defense" ).val(0)
+				clearTreachery()
+				leaderstrength = 0
+				calcStr()
 			break
 			//Cheap Hero
 			case 0:
 				$( "#no-leader-button" ).attr("src", `img/leaders/leader-0.png`)
-				$( "#leader-killed-column" ).removeClass( "is-hidden" )
+				$( "#leader-killed-button" ).removeClass( "is-hidden" )
 				leaderstrength = 0
 				$( "#treachery-columns" ).removeClass( "is-hidden" )
 				calcStr()
@@ -167,7 +183,7 @@ function leaderclick(leaderint){
 			//Everyone else
 			default:
 				$( "#no-leader-button" ).attr("src", `img/leaders/${faction}-leader-${leaderint}.png`)
-				$( "#leader-killed-column" ).removeClass( "is-hidden" )
+				$( "#leader-killed-button" ).removeClass( "is-hidden" )
 				leaderstrength = leadervalues[faction][leaderint]
 				$( "#treachery-columns" ).removeClass( "is-hidden" )
 				calcStr()
@@ -199,7 +215,6 @@ function validateSpice() {
 
 jQuery( document ).ready(function($) {
   $( "#faction" ).on("change", function(){
-	//$( "#banner" ).addClass( "is-hidden" )
     var faction = $( "#faction" ).children( "option:selected" ).val()
     $( "#forces-column" ).addClass( "is-hidden" )
     $( "#stars-column" ).addClass( "is-hidden" )
@@ -220,7 +235,7 @@ jQuery( document ).ready(function($) {
       // No faction
       case '0':
 		$( "#no-leader-column" ).addClass( "is-hidden" )
-		$( "#leader-killed-column" ).addClass( "is-hidden" )
+		$( "#leader-killed-button" ).addClass( "is-hidden" )
         // console.log("no faction")
         break
       // Emperor

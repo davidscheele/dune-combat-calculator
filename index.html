@@ -125,60 +125,43 @@
             </div>
             <div class="column"></div>
           </div>
-		<div class="column has-text-centered is-hidden" id="no-leader-column">
-              <div class="field has-text-centered">
-			  <img src="img/leaders/no-leader.png" id="no-leader-button" width="100" height="100" onclick="noleaderclick()">
-              </div>
-            </div>
-		<div class="columns is-multiline is-mobile has-text-centered is-hidden" id="leader-columns">
-		 <div class="column"></div>
-            <div class="column" id="leader1-column">
-              <div class="field has-text-centered">
-			   <img src="" id="leader1-button" width="100" height="100" onclick="leaderclick(1)">
-              </div>
-            </div>
-            <div class="column" id="leader2-column">
-              <div class="field has-text-centered">
-			 <img src="" id="leader2-button" width="100" height="100" onclick="leaderclick(2)">
-              </div>
-            </div>
-            <div class="column" id="leader3-column">
-              <div class="field has-text-centered">
-			  <img src="" id="leader3-button" width="100" height="100" onclick="leaderclick(3)">
-              </div>
-			   </div>
-			<div class="column" id="leader4-column">
-              <div class="field has-text-centered">
-			  <img src="" id="leader4-button" width="100" height="100" onclick="leaderclick(4)">
-              </div>
-			   </div>
-			<div class="column" id="leader5-column">
-              <div class="field has-text-centered">
-			 <img src="" id="leader5-button" width="100" height="100" onclick="leaderclick(5)">
-              </div>
-			   </div>
-			  <div class="column is-hidden" id="leader6-column">
-              <div class="field has-text-centered">
-			 <img src="" id="leader6-button" width="100" height="100" onclick="leaderclick(6)">
-              </div>
-			   </div>
-		<div class="column"></div>
-		</div>
-		<div class="columns is-multiline is-mobile has-text-centered">
-		<div class="column"></div>
-		<div class="column is-hidden" id="cheap-hero-column">
-              <div class="field has-text-centered">
-			  <img src="img/leaders/leader-0.png" width="100" height="100" id="leader0-button" onclick="leaderclick(0)">
-              </div>
-        </div>
-		<div class="column is-hidden" id="captured-leader-column">
-              <div class="field has-text-centered">
-			  <img src="img/leaders/captured-leader.png" width="100" height="100" id="captured-leader-button" onclick="leaderclick(10)">
-              </div>
-		</div>
-				<div class="column is-hidden field has-text-centered" id="leader-killed-column">
-			  <img src="img/leaders/leader-killed.png" width="50" height="50" id="leader-killed-button" onclick="leaderclick(99)">
+		<div class="grid-container is-hidden" id="no-leader-column">
+		<div class="grid-item">
+			  <img class="is-hidden" src="img/leaders/leader-killed.png" width="50" height="50" id="leader-killed-button" onclick="leaderclick(99)">
 			  </div>
+              <div class="grid-item" >
+			  <img src="img/leaders/no-leader.png" id="no-leader-button" width="100" height="100" onclick="noleaderclick()">
+			</div>
+			
+			
+            </div>
+		<div class="grid-container is-hidden" id="leader-columns">
+            <div class="grid-item" id="leader1-column">
+			   <img src="" id="leader1-button" width="100" height="100" onclick="leaderclick(1)">
+            </div>
+            <div class="grid-item" id="leader2-column">
+			 <img src="" id="leader2-button" width="100" height="100" onclick="leaderclick(2)">
+            </div>
+            <div class="grid-item" id="leader3-column">
+			  <img src="" id="leader3-button" width="100" height="100" onclick="leaderclick(3)">
+			</div>
+			<div class="grid-item" id="leader4-column">
+			  <img src="" id="leader4-button" width="100" height="100" onclick="leaderclick(4)">
+			</div>
+			<div class="grid-item" id="leader5-column">
+			 <img src="" id="leader5-button" width="100" height="100" onclick="leaderclick(5)">
+            </div>
+			  <div class="grid-item is-hidden" id="leader6-column">
+			 <img src="" id="leader6-button" width="100" height="100" onclick="leaderclick(6)">
+			</div>
+			</div>
+			<div class="grid-container" >
+			<div class="grid-item is-hidden" id="cheap-hero-column">
+			<img src="img/leaders/leader-0.png" width="100" height="100" id="leader0-button" onclick="leaderclick(0)">
+			</div>
+			<div class="grid-item is-hidden" id="captured-leader-column">
+			 <img src="img/leaders/captured-leader.png" width="100" height="100" id="captured-leader-button" onclick="leaderclick(10)">
+			</div>
 		<div class="column"></div>
 		</div>
 		<div class="grid-container is-hidden" id="faction-grid">
@@ -276,6 +259,15 @@
         </form>
       </div>
     </section>
-    <section class="section"></section>
+	<section class="footer is-dark" id="footer">
+      <div class="hero-body has-text-centered">
+        <p class="subtitle">
+          Find this on <a href="https://github.com/davidscheele/dune-combat-calculator">GitHub</a><br>
+		  Leave suggestions in the comments<br>
+		  Original calculator by <a href="https://github.com/Erelyks">Erelyks</a><br>
+		  Leaders and treachery card functionality added by <a href="https://github.com/davidscheele">davidscheele</a>
+        </p>
+      </div>
+    </section>
   </body>
 </html>
