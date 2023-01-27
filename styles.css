@@ -48,3 +48,10 @@ img {
     display:block;
     margin:auto;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  align-items: center;
+  justify-content: center;
+}

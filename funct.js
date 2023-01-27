@@ -85,7 +85,7 @@ function factionclick(faction){
 	$( "#leader4-button" ).attr("src", `img/leaders/${faction}-leader-4.png`)
 	$( "#leader5-button" ).attr("src", `img/leaders/${faction}-leader-5.png`)
 	$( "#no-leader-column" ).addClass( "is-hidden" )
-	$( "#faction-columns" ).addClass( "is-hidden" )
+	$( "#faction-grid" ).addClass( "is-hidden" )
 	$( "#leader-columns" ).removeClass( "is-hidden" )
 }
 
@@ -99,7 +99,7 @@ function noleaderclick(){
 	$( "#leader4-button" ).attr("src", `img/leaders/${faction}-leader-4.png`)
 	$( "#leader5-button" ).attr("src", `img/leaders/${faction}-leader-5.png`)
 	$( "#no-leader-column" ).addClass( "is-hidden" )
-	$( "#faction-columns" ).addClass( "is-hidden" )
+	$( "#faction-grid" ).addClass( "is-hidden" )
 	$( "#leader-killed-column" ).addClass( "is-hidden" )
 	$( "#treachery-columns" ).addClass( "is-hidden" )
 	$( "#leader-columns" ).removeClass( "is-hidden" )
@@ -162,7 +162,7 @@ function leaderclick(leaderint){
 			//Captured leader selection
 			case 10:
 				$( "#no-leader-column" ).addClass( "is-hidden" )
-				$( "#faction-columns" ).removeClass( "is-hidden" )
+				$( "#faction-grid" ).removeClass( "is-hidden" )
 			break
 			//Everyone else
 			default:
