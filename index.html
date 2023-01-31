@@ -75,6 +75,7 @@
               <div class="field has-text-centered">
                 <input class="input is-rounded is-medium has-text-centered" type="number" step="1" min="0" max="20" name="forces" id="forces">
                 <label id="forces-label" class="label" for="forces">Forces</label>
+
               </div>
             </div>
 			
@@ -132,6 +133,9 @@
               <div class="grid-item" >
 			  <img src="img/leaders/no-leader.png" id="no-leader-button" width="100" height="100" onclick="noleaderclick()">
 			</div>
+			<div class="grid-item" >
+			  <img class="is-hidden" src="img/leaders/no-kwisatz-haderach.png" id="kwisatz-haderach-button" width="100" height="100" onclick="kwisatzclick()">
+			  </div>
 			
 			
             </div>
@@ -193,15 +197,14 @@
 				<img src="img/10.png" id="faction10-button" width="100" height="100" onclick="factionclick(10)">
 		</div>
 		</div>
-		<div class="columns is-multiline is-mobile has-text-centered is-hidden" id="treachery-columns">
-			<div class="column"></div>
-			<div class="column is-narrow" id="weapon-column">
+		<div class="duo-grid-container is-hidden" id="treachery-columns">
+			<div class="grid-item has-text-centered" id="weapon-column">
 				<img class="is-hidden" src="" id="weapon-icon" width="50" height="50">
 				<img class="is-hidden" src="" id="weapon-icon2" width="50" height="50">
 				<label class="label is-hidden" id="weapon-icon-label"></label>
 				<div class="field has-text-centered">
 					<label class="label" for="weapon">Weapon</label>
-					<div class="select is-rounded">
+					<div class="select is-rounded is-one-quarter-mobile">
 						<select class="has-text-centered" name="weapon" id="weapon">
 							<option value="0">No Weapon</option>
 							<option value="1">Crysknife</option>
@@ -230,13 +233,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="column is-narrow" id="defense-column">
+			<div class="grid-item has-text-centered" id="defense-column">
 				<img class="is-hidden" src="" id="defense-icon" width="50" height="50">
 				<img class="is-hidden" src="" id="defense-icon2" width="50" height="50">
 				<label class="label is-hidden" id="defense-icon-label"></label>
 				<div class="field has-text-centered">
 					<label class="label" for="defense">Defense</label>
-					<div class="select is-rounded">
+					<div class="select is-rounded is-one-quarter-mobile">
 						<select class="has-text-centered" name="defense" id="defense">
 							<option value="0">No Defense</option>
 							<option value="1">Shield</option>
@@ -254,7 +257,6 @@
 					</div>
 				</div>
 			</div>
-			 <div class="column"></div>
 		</div>
         </form>
       </div>

@@ -14,7 +14,9 @@
 */
 
 var hostagefaction = 0
+var kwisatzbonus = 0
 var leaderstrength = 0
+
 
 var leadervalues = new Array()
 leadervalues[1] = new Array(0, 5, 5, 4, 2, 1)
@@ -53,7 +55,7 @@ function calcStr() {
       strength = (forces + spice) / 2
   }
   $( "#strength" ).val( strength.toString() )
-  var totalstrength = (strength + leaderstrength)
+  var totalstrength = (strength + leaderstrength + kwisatzbonus)
   $( "#total-strength" ).val( totalstrength.toString() )
 }
 
@@ -102,6 +104,7 @@ function noleaderclick(){
 	$( "#faction-grid" ).addClass( "is-hidden" )
 	$( "#leader-killed-button" ).addClass( "is-hidden" )
 	$( "#treachery-columns" ).addClass( "is-hidden" )
+	$( "#kwisatz-haderach-button" ).addClass( "is-hidden" )
 	$( "#leader-columns" ).removeClass( "is-hidden" )
 	$( "#cheap-hero-column" ).removeClass( "is-hidden" )
 	switch (faction) {
@@ -139,6 +142,18 @@ function leaderclick(leaderint){
 	{
 		$( "#no-leader-button" ).attr("src", `img/leaders/leader-killed.png`)
 		$( "#leader-killed-button" ).addClass( "is-hidden" )
+		if (faction == 1)
+		{
+			if (kwisatzbonus > 0)
+			{
+				$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/kwisatz-haderach-gone.png`)
+				kwisatzbonus = 0
+			}
+			else
+			{
+				$( "#kwisatz-haderach-button" ).addClass( "is-hidden" )
+			}			
+		}
 		leaderstrength = 0
 		calcStr()
 	}
@@ -173,6 +188,11 @@ function leaderclick(leaderint){
 				$( "#leader-killed-button" ).removeClass( "is-hidden" )
 				leaderstrength = 0
 				$( "#treachery-columns" ).removeClass( "is-hidden" )
+				//Atreides Kwisatz Haderach Check
+				if (faction == 1)
+				{
+					$( "#kwisatz-haderach-button" ).removeClass( "is-hidden" )
+				}
 				calcStr()
 			break
 			//Captured leader selection
@@ -180,8 +200,15 @@ function leaderclick(leaderint){
 				$( "#no-leader-column" ).addClass( "is-hidden" )
 				$( "#faction-grid" ).removeClass( "is-hidden" )
 			break
-			//Everyone else
+			//Everything else
 			default:
+				//Atreides Kwisatz Haderach Check
+				if (faction == 1)
+				{
+					$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/no-kwisatz-haderach.png`)
+					$( "#kwisatz-haderach-button" ).removeClass( "is-hidden" )
+					kwisatzbonus = 0
+				}
 				$( "#no-leader-button" ).attr("src", `img/leaders/${faction}-leader-${leaderint}.png`)
 				$( "#leader-killed-button" ).removeClass( "is-hidden" )
 				leaderstrength = leadervalues[faction][leaderint]
@@ -190,6 +217,21 @@ function leaderclick(leaderint){
 			break
 		}
 	}
+	}
+}
+
+function kwisatzclick(){
+	if (kwisatzbonus < 2)
+	{
+		kwisatzbonus = 2
+		$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/kwisatz-haderach.png`)
+		calcStr()
+	}
+	else
+	{
+		kwisatzbonus = 0
+		$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/no-kwisatz-haderach.png`)
+		calcStr()
 	}
 }
 
@@ -213,8 +255,20 @@ function validateSpice() {
 
 }
 
+function incfield(fieldname) {
+	console.log(fieldname)
+	
+}
+
+function decfield() {
+	
+}
+
 jQuery( document ).ready(function($) {
+	$( "#forces-column" ).append('')
   $( "#faction" ).on("change", function(){
+	kwisatzbonus = 0
+	$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/no-kwisatz-haderach.png`)
     var faction = $( "#faction" ).children( "option:selected" ).val()
     $( "#forces-column" ).addClass( "is-hidden" )
     $( "#stars-column" ).addClass( "is-hidden" )
