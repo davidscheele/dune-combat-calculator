@@ -269,6 +269,7 @@ jQuery( document ).ready(function($) {
   $( "#faction" ).on("change", function(){
 	kwisatzbonus = 0
 	$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/no-kwisatz-haderach.png`)
+	$( "#kwisatz-haderach-button" ).addClass( "is-hidden" )
     var faction = $( "#faction" ).children( "option:selected" ).val()
     $( "#forces-column" ).addClass( "is-hidden" )
     $( "#stars-column" ).addClass( "is-hidden" )
