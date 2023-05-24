@@ -111,6 +111,12 @@ function noleaderclick(){
 		//Harkonnen
 		case '5':
 		$( "#captured-leader-column" ).removeClass( "is-hidden" )
+		$( "#captured-leader-button" ).attr("src", `img/leaders/captured-leader.png`)
+		break
+		//Tleilaxu
+		case '8':
+		$( "#captured-leader-column" ).removeClass( "is-hidden" )
+		$( "#captured-leader-button" ).attr("src", `img/leaders/ghola.png`)
 		break
 		//CHOAM
 		case '9':
@@ -127,6 +133,149 @@ function clearTreachery(){
 			$( "#defense-icon" ).addClass( "is-hidden" )
 			$( "#defense-icon2" ).addClass( "is-hidden" )
 			$( "#defense-icon-label" ).addClass( "is-hidden" )
+}
+
+function plustrigger(id){
+	var forcestmp = parseInt($( "#forces" ).val())
+	var spicetmp = parseInt($( "#spice" ).val())
+	var starstmp = parseInt($( "#stars" ).val())
+	
+	switch (id) {
+		case 'forces':
+			var faction = $( "#faction" ).children("option:selected").val()
+			switch (faction) {
+				//Fremen
+				case '4':
+					if (forcestmp < 17) {
+						forcestmp = forcestmp + 1
+						$( "#forces" ).val( forcestmp.toString() )
+						calcStr()
+					}
+				break
+				//Emperor
+				case '3':
+					if (forcestmp < 15) {
+						forcestmp = forcestmp + 1
+						$( "#forces" ).val( forcestmp.toString() )
+						calcStr()
+					}
+				break
+				//Ixians
+				case '6':
+					if (forcestmp < 13) {
+						forcestmp = forcestmp + 1
+						$( "#forces" ).val( forcestmp.toString() )
+						calcStr()
+					}
+				break
+				default:
+					if (forcestmp < 20) {
+						forcestmp = forcestmp + 1
+						$( "#forces" ).val( forcestmp.toString() )
+						calcStr()
+					}
+				break
+			}
+		break
+		case 'spice':
+			var faction = $( "#faction" ).children("option:selected").val()
+				switch (faction) {
+					//Ixians
+					case '6':
+					if (spicetmp < (starstmp) ) {
+						spicetmp = spicetmp + 1
+						$( "#spice" ).val( spicetmp.toString() )
+						calcStr()
+					}
+					break
+					default:
+					if (spicetmp < (forcestmp + starstmp) ) {
+						spicetmp = spicetmp + 1
+						$( "#spice" ).val( spicetmp.toString() )
+						calcStr()
+					}
+					break
+				}
+		break
+		case 'stars':
+			var faction = $( "#faction" ).children("option:selected").val()
+			switch (faction) {
+				//Fremen
+				case '4':
+					if (starstmp < 3) {
+						starstmp = starstmp + 1
+						$( "#stars" ).val( starstmp.toString() )
+						calcStr()
+					}
+				break
+				//Emperor
+				case '3':
+					if (starstmp < 5) {
+						starstmp = starstmp + 1
+						$( "#stars" ).val( starstmp.toString() )
+						calcStr()
+					}
+				break
+				//Ixians
+				case '6':
+					if (starstmp < 7) {
+						starstmp = starstmp + 1
+						$( "#stars" ).val( starstmp.toString() )
+						calcStr()
+					}
+				break
+			}
+		break
+	}
+}
+
+function minustrigger(id){
+	var forcestmp = parseInt($( "#forces" ).val())
+	var spicetmp = parseInt($( "#spice" ).val())
+	var starstmp = parseInt($( "#stars" ).val())
+	
+	switch (id) {
+		case 'forces':
+			if (forcestmp > 0) {
+				forcestmp = forcestmp - 1
+				$( "#forces" ).val( forcestmp.toString() )
+				var forcescombo = forcestmp + starstmp
+				if (spicetmp > forcescombo) {
+					$( "#spice" ).val( forcescombo.toString() )
+				}
+				calcStr()
+			}
+		break
+		case 'spice':
+			if (spicetmp > 0) {
+				spicetmp = spicetmp - 1
+				$( "#spice" ).val( spicetmp.toString() )
+				calcStr()
+			}
+		break
+		case 'stars':
+			if (starstmp > 0) {
+				var faction = $( "#faction" ).children("option:selected").val()
+				starstmp = starstmp - 1
+				$( "#stars" ).val( starstmp.toString() )
+				switch (faction) {
+					//Ixians
+					case '6':
+						if (spicetmp > starstmp) {
+							$( "#spice" ).val( starstmp.toString() )
+						}
+					break
+					default:
+						var forcescombo = forcestmp + starstmp
+						if (spicetmp > forcescombo) {
+							$( "#spice" ).val( forcescombo.toString() )
+						}	
+					break
+				}
+				calcStr()
+			}
+		break
+	}
 }
 
 //General leader select
@@ -159,13 +308,14 @@ function leaderclick(leaderint){
 	}
 	else
 	{
-	//Leader is a Harkonnen hostage
-	if (faction == 5 && hostagefaction > 0)
+	//Leader is a Harkonnen hostage or a tleilaxu ghola
+	if ((faction == 5 || faction == 8) && hostagefaction > 0)
 	{
 		$( "#no-leader-button" ).attr("src", `img/leaders/${hostagefaction}-leader-${leaderint}.png`)
 		$( "#leader-killed-button" ).removeClass( "is-hidden" )
 		leaderstrength = leadervalues[hostagefaction][leaderint]
 		$( "#treachery-columns" ).removeClass( "is-hidden" )
+		hostagefaction = 0
 		calcStr()
 	}
 	else
@@ -180,6 +330,7 @@ function leaderclick(leaderint){
 				$( "#defense" ).val(0)
 				clearTreachery()
 				leaderstrength = 0
+				$( "#faction-grid" ).addClass( "is-hidden" )
 				calcStr()
 			break
 			//Cheap Hero
@@ -195,8 +346,18 @@ function leaderclick(leaderint){
 				}
 				calcStr()
 			break
-			//Captured leader selection
+			//Captured leader oh ghola selection
 			case 10:
+				if (faction == 5)
+					{
+						$( "#faction8-column" ).removeClass( "is-hidden" )
+						$( "#faction5-column" ).addClass( "is-hidden" )
+					}
+				else
+					{
+						$( "#faction5-column" ).removeClass( "is-hidden" )
+						$( "#faction8-column" ).addClass( "is-hidden" )
+					}
 				$( "#no-leader-column" ).addClass( "is-hidden" )
 				$( "#faction-grid" ).removeClass( "is-hidden" )
 			break
@@ -271,6 +432,7 @@ jQuery( document ).ready(function($) {
 	$( "#kwisatz-haderach-button" ).attr("src", `img/leaders/no-kwisatz-haderach.png`)
 	$( "#kwisatz-haderach-button" ).addClass( "is-hidden" )
     var faction = $( "#faction" ).children( "option:selected" ).val()
+	$( "#reminder-label" ).addClass( "is-hidden" )
     $( "#forces-column" ).addClass( "is-hidden" )
     $( "#stars-column" ).addClass( "is-hidden" )
     $( "#spice-column" ).addClass( "is-hidden" )
@@ -283,9 +445,19 @@ jQuery( document ).ready(function($) {
     $( "#spice" ).val("0")
     $( "#strength" ).val("0")
     $( "#faction-icon" ).attr("src", `img/${faction}.png`)
+	var margsw = document.querySelector(':root');
+	margsw.style.setProperty('--star-margin', 'auto')
 
-	leaderclick(-1)
+	calcStr()
 	
+	leaderclick(-1)
+	if (faction > 0) {
+		$( "#reminder-label" ).removeClass( "is-hidden" )
+		$( "#forces-column" ).removeClass( "is-hidden" )
+		$( "#strength-column" ).removeClass( "is-hidden" )
+		$( "#total-strength-column" ).removeClass( "is-hidden" )
+		$( "#spice-column" ).removeClass( "is-hidden" )	
+	}
     switch (faction) {
       // No faction
       case '0':
@@ -300,23 +472,18 @@ jQuery( document ).ready(function($) {
         $( "#stars-label" ).text( "Sardaukar (★)" )
         $( "#forces" ).attr( "max", 15 )
         $( "#stars" ).attr( "max", 5 )
-        $( "#forces-column" ).removeClass( "is-hidden" )
         $( "#stars-column" ).removeClass( "is-hidden" )
-        $( "#strength-column" ).removeClass( "is-hidden" )
-		$( "#total-strength-column" ).removeClass( "is-hidden" )
-        $( "#spice-column" ).removeClass( "is-hidden" )
         break
       // Fremen
       case '4':
         // console.log("fremen")
+		margsw.style.setProperty('--star-margin', '0px')
         $( "#forces-label" ).text( "Ordinary Forces" )
         $( "#stars-label" ).text( "Fedaykin (★)" )
         $( "#forces" ).attr( "max", 17 )
         $( "#stars" ).attr( "max", 3 )
-        $( "#forces-column" ).removeClass( "is-hidden" )
         $( "#stars-column" ).removeClass( "is-hidden" )
-        $( "#strength-column" ).removeClass( "is-hidden" )
-		$( "#total-strength-column" ).removeClass( "is-hidden" )
+		$( "#spice-column" ).addClass( "is-hidden" )
         $( "#karamaed-container" ).removeClass( "is-hidden" )
         break
       // Ixians
@@ -326,11 +493,7 @@ jQuery( document ).ready(function($) {
         $( "#stars-label" ).text( "Cyborgs (★)" )
         $( "#forces" ).attr( "max", 13 )
         $( "#stars" ).attr( "max", 7 )
-        $( "#forces-column" ).removeClass( "is-hidden" )
         $( "#stars-column" ).removeClass( "is-hidden" )
-        $( "#strength-column" ).removeClass( "is-hidden" )
-		$( "#toal-strength-column" ).removeClass( "is-hidden" )
-        $( "#spice-column" ).removeClass( "is-hidden" )
         break
       // Other factions
       default:
@@ -339,18 +502,18 @@ jQuery( document ).ready(function($) {
         $( "#stars-label" ).text( "" )
         $( "#forces" ).attr( "max", 20 )
         $( "#stars" ).attr( "max", 0 )
-        $( "#forces-column" ).removeClass( "is-hidden" )
-        $( "#strength-column" ).removeClass( "is-hidden" )
-		$( "#total-strength-column" ).removeClass( "is-hidden" )
-        $( "#spice-column" ).removeClass( "is-hidden" )	
     }
+
 	
   })
 
   $( "#karamaed" ).on("change", function(){
+	var margsw = document.querySelector(':root');
     if ($( '#karamaed' ).is(":checked")) {
+	  margsw.style.setProperty('--star-margin', 'auto')
       $( "#spice-column" ).removeClass( "is-hidden" )
     } else {
+	  margsw.style.setProperty('--star-margin', '0px')
       $( "#spice-column" ).addClass( "is-hidden" )
     }
     $( "#spice" ).val( "0" )

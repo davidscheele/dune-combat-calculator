@@ -1,3 +1,7 @@
+:root {
+	--star-margin: auto;
+}
+
 .tooltip {
   position: relative;
   display: inline-block;
@@ -79,4 +83,107 @@ big {
 chlogvers {
 	font-size: 150%;
 	font-weight: bold;
+}
+
+.grid-container-pack {
+	display: grid;
+	grid-template-areas: "input input input" "plus label minus";
+
+}
+
+
+
+.grid-pack-plus {
+	grid-area: plus;
+	margin-left: auto;
+	margin-right: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 35px;
+	height: 35px;
+}
+
+.grid-pack-input {
+	grid-area: input;
+	margin-left: auto;
+	margin-right: auto;
+	width: 60px; 
+}
+
+.grid-pack-minus {
+	grid-area: minus;
+	margin-left: 0;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 35px;
+	height: 35px;
+	
+}
+
+.reminder {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-pack-label {
+	grid-area: label;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.grid-container-pack2 {
+	display: grid;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+.grid-container-pack-forces {
+	display: grid;
+	margin-left: auto;
+	margin-right: 0px;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+.grid-container-pack-starred {
+	display: grid;
+	margin-left: var(--star-margin);
+	margin-right: auto;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+.grid-container-pack-spice {
+	display: grid;
+	margin-left: 0px;
+	margin-right: auto;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+	.grid-container-pack-starred {
+	display: grid;
+	margin-left: 0px;
+	margin-right: auto;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+.grid-container-pack-spice {
+	display: grid;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
 }

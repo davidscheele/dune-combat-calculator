@@ -19,9 +19,9 @@
     <title>Dune – Combat Calculator</title>
     <link rel="icon" type="image/x-icon" href="img/0.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="devstyles.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="funct.js"></script>
+    <script src="devfunct.js"></script>
   </head>
   <body>
     <section class="hero is-dark" id="banner">
@@ -35,6 +35,8 @@
 		<a href="index.html">Calculator</a> | <a href="what.html">What is this?</a>
       </div>
     </section>
+				
+								
     <section class="section">
       <div class="container">
         <form id="dataform" name="dataform" method="post">
@@ -43,8 +45,7 @@
               <img class="is-rounded" src="img/0.png" id="faction-icon">
             </figure>
           </center>
-          <div class="columns is-mobile mt-1">
-            <div class="column"></div>
+          <div class="columns is-mobile mt-1 is-centered">
             <div class="column is-narrow">
               <div class="field has-text-centered">
                 <label class="label" for="faction">Faction</label>
@@ -65,38 +66,48 @@
                 </div>
               </div>
             </div>
-            <div class="column"></div>
           </div>
+  
           <br>
+		  
+		<div class="columns is-multiline is-mobile has-text-centered">
+			<div class="column is-hidden" id="reminder-label">
+				<div class="reminder" ><label class="label centered">Reminder: Win or lose, all forces dialed are killed, all spice dialed is spent</label></div>
+			</div>
+		</div>
+
           <div class="columns is-multiline is-mobile has-text-centered">
 		  
-            <div class="column"></div>
+            <div class="column is-hidden" id="forces-column">
+			<div class="grid-container-pack-forces"> 
+                <div class="grid-pack-input"><input class="input is-rounded has-text-centered" name="forces" id="forces" readonly></div>
+				 <div class="grid-pack-plus"><img src="img/plusbutton.png" id="plus-button" onclick="plustrigger('forces')"></div>
+				 <div class="grid-pack-label"><label id="forces-label" class="label">Forces</label></div>
+			  <div class="grid-pack-minus"><img src="img/minusbutton.png" id="minus-button" onclick="minustrigger('forces')"></div>
+			  </div>
+			</div>
 			
-            <div class="column is-2-tablet is-one-quarter-mobile is-hidden" id="forces-column">
-              <div class="field has-text-centered">
-                <input class="input is-rounded is-medium has-text-centered" type="number" step="1" min="0" max="20" name="forces" id="forces">
-                <label id="forces-label" class="label" for="forces">Forces</label>
-
+            <div class="column is-hidden" id="stars-column">
+              <div class="grid-container-pack-starred">
+			  <div class="grid-pack-input"><input class="input is-rounded has-text-centered" name="stars" id="stars" readonly></div>
+				 <div class="grid-pack-plus"><img src="img/plusbutton.png" id="plus-button" onclick="plustrigger('stars')"></div>
+				 <div class="grid-pack-label"><label id="stars-label" class="label"></label></div>
+			  <div class="grid-pack-minus"><img src="img/minusbutton.png" id="minus-button" onclick="minustrigger('stars')"></div>
               </div>
             </div>
 			
-            <div class="column is-2-tablet is-one-quarter-mobile is-hidden" id="stars-column">
-              <div class="field has-text-centered">
-                <input class="input is-rounded is-medium has-text-centered" type="number" step="1" min="0" max="0" name="stars" id="stars">
-                <label id="stars-label" class="label" for="stars"></label>
+            <div class="column is-hidden" id="spice-column">
+              <div class="grid-container-pack-spice">
+			  <div class="grid-pack-input"><input class="input is-rounded has-text-centered" name="spice" id="spice" readonly></div>
+				<div class="grid-pack-plus"><img src="img/plusbutton.png" id="plus-button" onclick="plustrigger('spice')"></div>
+				 <div class="grid-pack-label"><label id="spice-label" class="label">Spice</label></div>
+			  <div class="grid-pack-minus"><img src="img/minusbutton.png" id="minus-button" onclick="minustrigger('spice')"></div>
+               
               </div>
             </div>
-			
-            <div class="column is-2-tablet is-one-quarter-mobile is-hidden" id="spice-column">
-              <div class="field has-text-centered">
-                <input class="input is-rounded is-medium has-text-centered" type="number" step="1" min="0" max="0" name="spice" id="spice">
-                <label id="spice-label" class="label" for="spice">Spice</label>
-              </div>
-            </div>
-			
-            <div class="column"></div>
 			
           </div>
+	  
           <div class="is-hidden" id="karamaed-container">
             <center>
               <label class="checkbox">
@@ -107,25 +118,21 @@
               </label>
             </center>
           </div>
-          <div class="columns is-mobile mt-3">
-            <div class="column"></div>
-            <div class="column is-2-tablet is-one-third-mobile is-hidden" id="strength-column">
+          <div class="columns is-multiline is-mobile has-text-centered is-centered">
+            <div class="column is-one-third-tablet is-two-thirds-mobile is-hidden" id="strength-column">
               <div class="field has-text-centered">
-                <input class="input is-rounded is-medium has-text-centered" type="number" min="0" step="0.5" name="strength" id="strength" value="0" readonly>
-                <label id="strength-label" class="label" for="strength">Dialed Strength</label>
+                <input class="input is-rounded has-text-centered" name="strength" id="strength" value="0" readonly>
+                <label id="strength-label" class="label" for="strength">Dialed Strength<br>(Forces + Spice Support)</label>
               </div>
             </div>
-            <div class="column"></div>
           </div>
-		  <div class="columns is-mobile mt-3">
-            <div class="column"></div>
-            <div class="column is-2-tablet is-one-third-mobile is-hidden" id="total-strength-column">
+		  <div class="columns is-multiline is-mobile has-text-centered is-centered">
+            <div class="column  is-one-third-tablet is-two-thirds-mobile is-hidden" id="total-strength-column">
               <div class="field has-text-centered">
-                <input class="input is-rounded is-medium has-text-centered" type="number" min="0" step="0.5" name="total-strength" id="total-strength" value="0" readonly>
-                <label id="total-strength-label" class="label" for="total-strength">Total Strength</label>
+                <input class="input is-rounded has-text-centered" name="total-strength" id="total-strength" value="0" readonly>
+                <label id="total-strength-label" class="label" for="total-strength">Total Strength<br>(Dialed Strength + Leader)</label>
               </div>
             </div>
-            <div class="column"></div>
           </div>
 		<div class="grid-container is-hidden" id="no-leader-column">
 		<div class="grid-item">
@@ -181,6 +188,9 @@
 		</div>
 		<div class="grid-item" id="faction4-column">
 				<img src="img/4.png" id="faction4-button" width="100" height="100" onclick="factionclick(4)">
+		</div>
+		<div class="grid-item" id="faction5-column">
+				<img src="img/5.png" id="faction5-button" width="100" height="100" onclick="factionclick(5)">
 		</div>
 		<div class="grid-item" id="faction6-column">
 				<img src="img/6.png" id="faction6-button" width="100" height="100" onclick="factionclick(6)">
