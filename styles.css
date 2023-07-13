@@ -80,6 +80,11 @@ big {
 	font-weight: bold;
 }
 
+.big {
+	font-size: 300%;
+	font-weight: bold;
+}
+
 chlogvers {
 	font-size: 150%;
 	font-weight: bold;

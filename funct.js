@@ -23,7 +23,7 @@ leadervalues[1] = new Array(0, 5, 5, 4, 2, 1)
 leadervalues[2] = new Array(0, 5, 5, 5, 5, 5)
 leadervalues[3] = new Array(0, 6, 5, 3, 3, 2)
 leadervalues[4] = new Array(0, 7, 6, 5, 3, 2)
-leadervalues[5] = new Array(0, 6, 4, 4, 2, 1)
+leadervalues[5] = new Array(0, 6, 4, 3, 2, 1)
 leadervalues[6] = new Array(0, 5, 5, 4, 2, 1)
 leadervalues[7] = new Array(0, 5, 3, 3, 2, 1)
 leadervalues[8] = new Array(0, 0, 4, 3, 2, 1)
@@ -54,9 +54,11 @@ function calcStr() {
     default:
       strength = (forces + spice) / 2
   }
-  $( "#strength" ).val( strength.toString() )
+  //$( "#strength" ).val( strength.toString() )
+  document.getElementById('strength').innerHTML = strength;
   var totalstrength = (strength + leaderstrength + kwisatzbonus)
-  $( "#total-strength" ).val( totalstrength.toString() )
+  //$( "#total-strength" ).val( totalstrength.toString() )
+  document.getElementById('total-strength').innerHTML = totalstrength;
 }
 
 function validateForces() {
