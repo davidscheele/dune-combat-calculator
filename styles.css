@@ -1,5 +1,8 @@
 :root {
-	--star-margin: auto;
+	--star-margin-left: auto;
+	--star-margin-right: auto;
+	--spice-margin-left: 0px;
+	--spice-margin-right: auto;
 }
 
 .tooltip {
@@ -157,14 +160,23 @@ chlogvers {
 
 .grid-container-pack-starred {
 	display: grid;
-	margin-left: var(--star-margin);
-	margin-right: auto;
+	margin-left: var(--star-margin-left);
+	margin-right:  var(--star-margin-right);
 	grid-template-areas: "plus input minus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
 
 .grid-container-pack-spice {
+	display: grid;
+	margin-left:  var(--spice-margin-left);
+	margin-right:  var(--spice-margin-right);
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+.grid-container-pack-ecaz-forces {
 	display: grid;
 	margin-left: 0px;
 	margin-right: auto;
@@ -184,6 +196,15 @@ chlogvers {
 }
 
 .grid-container-pack-spice {
+	display: grid;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-areas: "plus input minus" "label label label";
+	grid-template-columns: 1fr 1fr 1fr;
+	max-width: 200px;
+}
+
+.grid-container-pack-ecaz-forces {
 	display: grid;
 	margin-left: auto;
 	margin-right: auto;

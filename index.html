@@ -62,6 +62,8 @@
                     <option value="10">Richese</option>
                     <option value="7">Spacing Guild</option>
                     <option value="8">Tleilaxu</option>
+					<option value="11">Moritani</option>
+					<option value="12">Ecaz</option>
                   </select>
                 </div>
               </div>
@@ -105,10 +107,16 @@
                
               </div>
             </div>
-			
+			 <div class="column is-hidden" id="ecaz-forces-column">
+              <div class="grid-container-pack-ecaz-forces">
+			  <div class="grid-pack-input"><input class="input is-rounded has-text-centered" name="ecaz-forces" id="ecaz-forces" readonly></div>
+				<div class="grid-pack-plus"><img src="img/plusbutton.png" id="plus-button" onclick="plustrigger('ecaz-forces')"></div>
+				 <div class="grid-pack-label"><label id="ecaz-forces-label" class="label">Ecaz Forces</label></div>
+			  <div class="grid-pack-minus"><img src="img/minusbutton.png" id="minus-button" onclick="minustrigger('ecaz-forces')"></div>
+            </div>
           </div>
-	  
-          <div class="is-hidden" id="karamaed-container">
+		  </div>
+		   <div class="is-hidden" id="karamaed-container">
             <center>
               <label class="checkbox">
                 <input type="checkbox" id="karamaed" name="karamaed">
@@ -118,7 +126,18 @@
               </label>
             </center>
           </div>
-          <div class="columns is-multiline is-mobile has-text-centered is-centered">
+		   <div class="is-hidden" id="ecaz-ally-container">
+            <center>
+              <label class="checkbox">
+                <input type="checkbox" id="ecaz-ally" name="ecaz-ally">
+                <div class="tooltip">Allied to Ecaz
+                  <span class="tooltiptext">Half of Ecaz forces present (rounded up) will be counted to the total stength.</span>
+                </div>
+              </label>
+            </center>
+          </div>
+		  <br>
+		           <div class="columns is-multiline is-mobile has-text-centered is-centered">
             <div class="column is-one-third-tablet is-two-thirds-mobile is-hidden" id="strength-column">
               <div class="field has-text-centered">
 				<label id="strength" class="label">0</label>
@@ -127,7 +146,7 @@
             </div>
           </div>
 		  <div class="columns is-multiline is-mobile has-text-centered is-centered">
-            <div class="column  is-one-third-tablet is-two-thirds-mobile is-hidden" id="total-strength-column">
+            <div class="column  is-two-third-tablet is-one-thirds-mobile is-hidden" id="total-strength-column">
               <div class="field has-text-centered">
 				<label id="total-strength" class="label big">0</label>
                 <label id="total-strength-label" class="label" for="total-strength">Total Strength<br>(Dialed Strength + Leader)</label>

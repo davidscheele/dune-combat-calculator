@@ -29,6 +29,8 @@ leadervalues[7] = new Array(0, 5, 3, 3, 2, 1)
 leadervalues[8] = new Array(0, 0, 4, 3, 2, 1)
 leadervalues[9] = new Array(0, 4, 4, 3, 3, 2, 2)
 leadervalues[10] = new Array(0, 5, 4, 3, 2, 2)
+leadervalues[11] = new Array(0, 6, 5, 4, 4, 2, 1)
+leadervalues[12] = new Array(0, 6, 4, 4, 3, 3, 2)
 
 function calcStr() {
   var faction = $( "#faction" ).children("option:selected").val()
@@ -36,6 +38,7 @@ function calcStr() {
   var stars = parseInt($( "#stars" ).val())
   var spice = parseInt($( "#spice" ).val())
   var karamaed = $( '#karamaed' ).is(":checked")
+  var ecazforces = parseInt($( "#ecaz-forces" ).val())
   var strength = 0
 
   switch (faction) {
@@ -56,7 +59,7 @@ function calcStr() {
   }
   //$( "#strength" ).val( strength.toString() )
   document.getElementById('strength').innerHTML = strength;
-  var totalstrength = (strength + leaderstrength + kwisatzbonus)
+  var totalstrength = (strength + leaderstrength + kwisatzbonus) + Math.ceil(ecazforces / 2)
   //$( "#total-strength" ).val( totalstrength.toString() )
   document.getElementById('total-strength').innerHTML = totalstrength;
 }
@@ -120,8 +123,10 @@ function noleaderclick(){
 		$( "#captured-leader-column" ).removeClass( "is-hidden" )
 		$( "#captured-leader-button" ).attr("src", `img/leaders/ghola.png`)
 		break
-		//CHOAM
+		//CHOAM Moritani or Ecaz
 		case '9':
+		case '11':
+		case '12':
 		$( "#leader6-column" ).removeClass( "is-hidden" )
 		$( "#leader6-button" ).attr("src", `img/leaders/${faction}-leader-6.png`)
 		break
@@ -141,6 +146,7 @@ function plustrigger(id){
 	var forcestmp = parseInt($( "#forces" ).val())
 	var spicetmp = parseInt($( "#spice" ).val())
 	var starstmp = parseInt($( "#stars" ).val())
+	var ecaztmp = parseInt($( "#ecaz-forces" ).val())
 	
 	switch (id) {
 		case 'forces':
@@ -228,6 +234,13 @@ function plustrigger(id){
 				break
 			}
 		break
+		case 'ecaz-forces':
+			if (ecaztmp < 20) {
+				ecaztmp = ecaztmp + 1
+				$( "#ecaz-forces" ).val( ecaztmp.toString() )
+				calcStr()
+			}
+		break
 	}
 }
 
@@ -235,6 +248,7 @@ function minustrigger(id){
 	var forcestmp = parseInt($( "#forces" ).val())
 	var spicetmp = parseInt($( "#spice" ).val())
 	var starstmp = parseInt($( "#stars" ).val())
+	var ecaztmp = parseInt($( "#ecaz-forces" ).val())
 	
 	switch (id) {
 		case 'forces':
@@ -274,6 +288,13 @@ function minustrigger(id){
 						}	
 					break
 				}
+				calcStr()
+			}
+		break
+		case 'ecaz-forces':
+			if (ecaztmp > 0) {
+				ecaztmp = ecaztmp - 1
+				$( "#ecaz-forces" ).val( ecaztmp.toString() )
 				calcStr()
 			}
 		break
@@ -418,13 +439,46 @@ function validateSpice() {
 
 }
 
-function incfield(fieldname) {
-	console.log(fieldname)
-	
-}
+function sortSpiceAndEcaz() {
+	var margsw = document.querySelector(':root');
 
-function decfield() {
+	if (!($( '#karamaed' ).is(":checked")) && !($( '#ecaz-ally' ).is(":checked"))) {
+		$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader)" )
+		$( "#ecaz-forces-column" ).addClass( "is-hidden" )
+		$( "#ecaz-forces" ).val( "0" )
+		$( "#spice-column" ).addClass( "is-hidden" )
+		$( "#spice" ).val( "0" )
+		margsw.style.setProperty('--star-margin-left', '0px')
 	
+	} else if (($( '#karamaed' ).is(":checked")) && !($( '#ecaz-ally' ).is(":checked"))) {
+		$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader)" )
+		$( "#ecaz-forces-column" ).addClass( "is-hidden" )
+		$( "#ecaz-forces" ).val( "0" )
+		$( "#spice-column" ).removeClass( "is-hidden" )
+		margsw.style.setProperty('--star-margin-left', 'auto')
+		//margsw.style.setProperty('--star-margin-right', 'auto')
+		margsw.style.setProperty('--spice-margin-left', '0px')
+		//margsw.style.setProperty('--spice-margin-right', 'auto')
+	
+	} else if (!($( '#karamaed' ).is(":checked")) && ($( '#ecaz-ally' ).is(":checked"))) {
+		$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader + Ecaz Support)" )
+		$( "#ecaz-forces-column" ).removeClass( "is-hidden" )
+		$( "#spice-column" ).addClass( "is-hidden" )
+		$( "#spice" ).val( "0" )
+		margsw.style.setProperty('--star-margin-left', 'auto')
+		//margsw.style.setProperty('--star-margin-right', 'auto')
+		
+	} else {
+		$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader + Ecaz Support)" )
+		$( "#ecaz-forces-column" ).removeClass( "is-hidden" )
+		$( "#spice-column" ).removeClass( "is-hidden" )
+		margsw.style.setProperty('--star-margin-left', 'auto')
+		//margsw.style.setProperty('--star-margin-right', 'auto')
+		margsw.style.setProperty('--spice-margin-left', 'auto')
+		//margsw.style.setProperty('--spice-margin-right', 'auto')
+	}
+    
+	calcStr()
 }
 
 jQuery( document ).ready(function($) {
@@ -442,13 +496,19 @@ jQuery( document ).ready(function($) {
 	$( "#total-strength-column" ).addClass( "is-hidden" )
     $( "#karamaed-container" ).addClass( "is-hidden" )
     $( "#karamaed" ).prop( "checked", false )
+	$( "#ecaz-forces-column" ).addClass( "is-hidden" )
+	$( "#ecaz-ally-container" ).removeClass( "is-hidden" )
+    $( "#ecaz-ally" ).prop( "checked", false )
+	$( "#ecaz-forces" ).val("0")
     $( "#forces" ).val("0")
     $( "#stars" ).val("0")
     $( "#spice" ).val("0")
     $( "#strength" ).val("0")
     $( "#faction-icon" ).attr("src", `img/${faction}.png`)
 	var margsw = document.querySelector(':root');
-	margsw.style.setProperty('--star-margin', 'auto')
+	margsw.style.setProperty('--star-margin-left', 'auto')
+	margsw.style.setProperty('--spice-margin-left', '0px')
+	$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader)" )
 
 	calcStr()
 	
@@ -479,7 +539,7 @@ jQuery( document ).ready(function($) {
       // Fremen
       case '4':
         // console.log("fremen")
-		margsw.style.setProperty('--star-margin', '0px')
+		margsw.style.setProperty('--star-margin-left', '0px')
         $( "#forces-label" ).text( "Ordinary Forces" )
         $( "#stars-label" ).text( "Fedaykin (★)" )
         $( "#forces" ).attr( "max", 17 )
@@ -496,6 +556,14 @@ jQuery( document ).ready(function($) {
         $( "#forces" ).attr( "max", 13 )
         $( "#stars" ).attr( "max", 7 )
         $( "#stars-column" ).removeClass( "is-hidden" )
+		break
+	  // Ecaz
+	  case '12':
+	    $( "#forces-label" ).text( "Forces" )
+        $( "#stars-label" ).text( "" )
+        $( "#forces" ).attr( "max", 20 )
+        $( "#stars" ).attr( "max", 0 )
+		$( "#ecaz-ally-container" ).addClass( "is-hidden" )
         break
       // Other factions
       default:
@@ -510,6 +578,7 @@ jQuery( document ).ready(function($) {
   })
 
   $( "#karamaed" ).on("change", function(){
+	  /*
 	var margsw = document.querySelector(':root');
     if ($( '#karamaed' ).is(":checked")) {
 	  margsw.style.setProperty('--star-margin', 'auto')
@@ -520,7 +589,48 @@ jQuery( document ).ready(function($) {
     }
     $( "#spice" ).val( "0" )
     calcStr()
+	*/
+	sortSpiceAndEcaz()
   })
+  
+  $( "#ecaz-ally" ).on("change", function(){
+
+	  /*
+	var margsw = document.querySelector(':root');
+	$( "#ecaz-forces-column" ).removeClass( "is-hidden" )
+    if ($( '#ecaz-ally' ).is(":checked")) {
+			margsw.style.setProperty('--star-margin-left', 'auto')
+			margsw.style.setProperty('--star-margin-right', 'auto')
+		if ($( '#karamaed' ).is(":checked")) {
+			margsw.style.setProperty('--spice-margin-left', 'auto')
+			margsw.style.setProperty('--spice-margin-right', 'auto')
+		} else {
+			margsw.style.setProperty('--spice-margin-left', '0px')
+			margsw.style.setProperty('--spice-margin-right', 'auto')
+		}
+    } else {
+		margsw.style.setProperty('--spice-margin-left', '0px')
+		$( "#ecaz-forces-column" ).addClass( "is-hidden" )
+    }
+    $( "#ecaz-forces" ).val( "0" )
+    calcStr()
+	*/
+	var margsw = document.querySelector(':root');
+	if ( $( "#faction" ).children( "option:selected" ).val() == 4){
+		sortSpiceAndEcaz()
+	} else if ($( '#ecaz-ally' ).is(":checked")) {
+		$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader + Ecaz Support)" )
+		margsw.style.setProperty('--spice-margin-left', 'auto')
+		$( "#ecaz-forces-column" ).removeClass( "is-hidden" )
+	} else {
+		$( "#total-strength-label").html( "Total Strength<br>(Dialed Strength + Leader)" )
+		$( "#ecaz-forces-column" ).addClass( "is-hidden" )
+		margsw.style.setProperty('--spice-margin-left', '0px')
+		$( "#ecaz-forces" ).val( "0" )
+	}
+  })
+  
+  
 
   $( "#forces, #stars, #spice" ).on("change", function(){
     validateForces()
