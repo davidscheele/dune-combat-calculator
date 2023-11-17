@@ -16,6 +16,7 @@
 var hostagefaction = 0
 var kwisatzbonus = 0
 var leaderstrength = 0
+var reinforcements = 0
 
 
 var leadervalues = new Array()
@@ -59,7 +60,7 @@ function calcStr() {
   }
   //$( "#strength" ).val( strength.toString() )
   document.getElementById('strength').innerHTML = strength;
-  var totalstrength = (strength + leaderstrength + kwisatzbonus) + Math.ceil(ecazforces / 2)
+  var totalstrength = (strength + leaderstrength + kwisatzbonus + reinforcements) + Math.ceil(ecazforces / 2)
   //$( "#total-strength" ).val( totalstrength.toString() )
   document.getElementById('total-strength').innerHTML = totalstrength;
 }
@@ -640,9 +641,15 @@ jQuery( document ).ready(function($) {
   
   $( "#weapon" ).on("change", function(){
 	var weapon = parseInt($( "#weapon" ).children( "option:selected" ).val())
+	var defense = parseInt($( "#defense" ).children( "option:selected" ).val())
 	$( "#weapon-icon" ).addClass( "is-hidden" )
 	$( "#weapon-icon2" ).addClass( "is-hidden" )
 	$( "#weapon-icon-label" ).addClass( "is-hidden" )	
+	if (!(defense == 6)) {$( "#forces-label2" ).addClass( "is-hidden" )}
+	if (!(defense == 7)) {
+		$( "#forces-label3" ).addClass( "is-hidden" )
+		reinforcements = 0
+		$( "#total-strength-label" ).html("Total Strength<br>(Dialed Strength + Leader")}
 	switch (true) {
 		//Projectile Weapons
 		case (weapon > 0 && weapon <= 5):
@@ -702,8 +709,27 @@ jQuery( document ).ready(function($) {
 			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
 			$( "#weapon-icon-label" ).html("Needs to be played with <br /> a defense to be a weapon <br /> Keep if battle is won")
 			break
+		//Harass & Withdraw
+		case (weapon == 17):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/hand-icon.png`)
+			$( "#forces-label2" ).removeClass( "is-hidden" )
+			$( "#forces-label2" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Discard after use")
+			$( "#weapon-icon-label" ).removeClass("is-hidden")
+			break
+		//Reinforcements
+		case (weapon == 18):
+			$( "#weapon-icon" ).removeClass( "is-hidden" )
+			$( "#weapon-icon" ).attr("src", `img/weapon-icons/hand-icon.png`)
+			reinforcements = 2
+			$( "#forces-label3" ).removeClass( "is-hidden" )
+			$( "#weapon-icon-label" ).html("Discard after use")
+			$( "#weapon-icon-label" ).removeClass("is-hidden")
+			$( "#total-strength-label" ).html("Total Strength<br>(Dialed Strength + Leader<br>+ Reinforcements)")
+			break
 		//Worthless
-		case (weapon > 16 && weapon <= 22):
+		case (weapon > 18 && weapon <= 24):
 			$( "#weapon-icon" ).removeClass( "is-hidden" )
 			$( "#weapon-icon" ).attr("src", `img/weapon-icons/worthless-icon.png`)
 			$( "#weapon-icon-label" ).removeClass( "is-hidden" )
@@ -715,12 +741,19 @@ jQuery( document ).ready(function($) {
 			$( "#weapon-icon-label" ).addClass( "is-hidden" )
 		break
 	}
+	calcStr()
   })
   $( "#defense" ).on("change", function(){
 	var defense = parseInt($( "#defense" ).children( "option:selected" ).val())
+	var weapon = parseInt($( "#weapon" ).children( "option:selected" ).val())
 	$( "#defense-icon" ).addClass( "is-hidden" )
 	$( "#defense-icon2" ).addClass( "is-hidden" )
 	$( "#defense-icon-label" ).addClass( "is-hidden" )
+	if (!(weapon == 17)) {$( "#forces-label2" ).addClass( "is-hidden" )}
+	if (!(weapon == 18)) {
+		$( "#forces-label3" ).addClass( "is-hidden" )
+		reinforcements = 0
+		$( "#total-strength-label" ).html("Total Strength<br>(Dialed Strength + Leader")}
 	switch (true) {
 		//Shield
 		case (defense == 1):
@@ -759,8 +792,27 @@ jQuery( document ).ready(function($) {
 			$( "#defense-icon-label" ).removeClass( "is-hidden" )
 			$( "#defense-icon-label" ).html("Needs to be played with <br /> a weapon to be a defense <br /> Keep if battle is won")
 		break
+		//Harass & Withdraw
+		case (defense == 6):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/hand-icon.png`)
+			//unhide "undialed forces are not killed but returned to reserves, unless a traitor is revealed" next to troop calculations
+			$( "#forces-label2" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Undialed forces are not killed but returned to reserves,<br />unless a traitor is revealed<br />Discard after use")
+			break
+		//Reinforcements
+		case (defense == 7):
+			$( "#defense-icon" ).removeClass( "is-hidden" )
+			$( "#defense-icon" ).attr("src", `img/weapon-icons/hand-icon.png`)
+			reinforcements = 2
+			$( "#forces-label3" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).removeClass( "is-hidden" )
+			$( "#defense-icon-label" ).html("Discard after use")
+			$( "#total-strength-label" ).html("Total Strength<br>(Dialed Strength + Leader<br>+ Reinforcements)")
+			break
 		//Worthless
-		case (defense > 5 && defense <= 11):
+		case (defense > 7 && defense <= 13):
 			$( "#defense-icon" ).removeClass( "is-hidden" )
 			$( "#defense-icon" ).attr("src", `img/weapon-icons/worthless-icon.png`)
 			$( "#defense-icon-label" ).removeClass( "is-hidden" )
@@ -772,5 +824,6 @@ jQuery( document ).ready(function($) {
 			$( "#defense-icon-label" ).addClass( "is-hidden" )
 		break
 	}
+	calcStr()
   })
 })

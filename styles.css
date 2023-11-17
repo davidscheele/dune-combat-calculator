@@ -139,6 +139,16 @@ chlogvers {
 	margin-left: auto;
 	margin-right: auto;
 }
+.grid-pack-label2 {
+	grid-area: label2;
+	margin-left: auto;
+	margin-right: auto;
+}
+.grid-pack-label3 {
+	grid-area: label3;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .grid-container-pack2 {
 	display: grid;
@@ -153,7 +163,7 @@ chlogvers {
 	display: grid;
 	margin-left: auto;
 	margin-right: 0px;
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "plus input minus" "label label label" "label2 label2 label2" "label3 label3 label3";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
