@@ -95,7 +95,7 @@ chlogvers {
 
 .grid-container-pack {
 	display: grid;
-	grid-template-areas: "input input input" "plus label minus";
+	grid-template-areas: "input input input" "minus label plus";
 
 }
 
@@ -103,8 +103,8 @@ chlogvers {
 
 .grid-pack-plus {
 	grid-area: plus;
-	margin-left: auto;
-	margin-right: 0;
+	margin-right: auto;
+	margin-left: 0;
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 35px;
@@ -120,8 +120,8 @@ chlogvers {
 
 .grid-pack-minus {
 	grid-area: minus;
-	margin-left: 0;
-	margin-right: auto;
+	margin-right: 0;
+	margin-left: auto;
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 35px;
@@ -150,11 +150,36 @@ chlogvers {
 	margin-right: auto;
 }
 
+.grid-pack-homeworlds {
+	grid-area: homeworlds;
+	margin-left: auto;
+	margin-right: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.grid-pack-ecaz {
+	grid-area: ecaz;
+	margin-left: 0;
+	margin-right: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.grid-container-head {
+	display: grid;
+	margin-left: auto;
+	margin-right: auto;
+	grid-template-areas: "homeworlds ecaz" "label label";
+	grid-template-columns: 1fr 1fr;
+	max-width: 400px;
+}
+
 .grid-container-pack2 {
 	display: grid;
 	margin-left: auto;
 	margin-right: auto;
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -163,7 +188,7 @@ chlogvers {
 	display: grid;
 	margin-left: auto;
 	margin-right: 0px;
-	grid-template-areas: "plus input minus" "label label label" "label2 label2 label2" "label3 label3 label3";
+	grid-template-areas: "minus input plus" "label label label" "label2 label2 label2" "label3 label3 label3";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -172,7 +197,7 @@ chlogvers {
 	display: grid;
 	margin-left: var(--star-margin-left);
 	margin-right:  var(--star-margin-right);
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -181,7 +206,7 @@ chlogvers {
 	display: grid;
 	margin-left:  var(--spice-margin-left);
 	margin-right:  var(--spice-margin-right);
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -190,7 +215,7 @@ chlogvers {
 	display: grid;
 	margin-left: 0px;
 	margin-right: auto;
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -200,7 +225,7 @@ chlogvers {
 	display: grid;
 	margin-left: 0px;
 	margin-right: auto;
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -209,7 +234,7 @@ chlogvers {
 	display: grid;
 	margin-left: auto;
 	margin-right: auto;
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
@@ -218,7 +243,7 @@ chlogvers {
 	display: grid;
 	margin-left: auto;
 	margin-right: auto;
-	grid-template-areas: "plus input minus" "label label label";
+	grid-template-areas: "minus input plus" "label label label";
 	grid-template-columns: 1fr 1fr 1fr;
 	max-width: 200px;
 }
